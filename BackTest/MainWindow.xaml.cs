@@ -173,8 +173,8 @@ namespace BackTest
                 decimal startAmountUSDT = (decimal)txbStartAmount.Value;
                 int minPerdiod = (int)txbMinPerdiod.Value;
                 int maxPerdiod = (int)txbMaxPerdiod.Value;
-                decimal minEma = (decimal)txbMinEMA.Value;
-                decimal maxEma = (decimal)txbMaxEMA.Value;
+                decimal minEma = (decimal)txbMinSMA.Value;
+                decimal maxEma = (decimal)txbMaxSMA.Value;
 
                 BackTest(startAmountUSDT, minEma, maxEma, minPerdiod, maxPerdiod);
 

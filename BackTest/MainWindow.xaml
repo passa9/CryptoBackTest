@@ -95,11 +95,11 @@
                         <TextBlock  Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Periods M:</TextBlock>
                         <Controls:NumericUpDown x:Name="txbMaxPerdiod" Value="0" Grid.Row="2" Grid.Column="1"  Margin="5"></Controls:NumericUpDown>
 
-                        <TextBlock  Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Min EMA:</TextBlock>
-                        <Controls:NumericUpDown x:Name="txbMinEMA" Value="0" Grid.Row="3" Grid.Column="1"  Margin="5"></Controls:NumericUpDown>
+                        <TextBlock  Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Min SMA:</TextBlock>
+                        <Controls:NumericUpDown x:Name="txbMinSMA" Value="0" Grid.Row="3" Grid.Column="1"  Margin="5"></Controls:NumericUpDown>
 
-                        <TextBlock  Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Max EMA:</TextBlock>
-                        <Controls:NumericUpDown x:Name="txbMaxEMA" Value="0" Grid.Row="4" Grid.Column="1"  Margin="5"></Controls:NumericUpDown>
+                        <TextBlock  Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Max SMA:</TextBlock>
+                        <Controls:NumericUpDown x:Name="txbMaxSMA" Value="0" Grid.Row="4" Grid.Column="1"  Margin="5"></Controls:NumericUpDown>
 
 
                         <Button  x:Name="btnStartBackTest" Click="BtnStartBackTest_OnClick"  Grid.Column="1" Grid.Row="5" Margin="8">Start</Button>
