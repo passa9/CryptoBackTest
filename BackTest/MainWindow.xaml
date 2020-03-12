@@ -1,0 +1,180 @@
+﻿<Controls:MetroWindow x:Class="BackTest.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:backTest="clr-namespace:BackTest"
+                      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+                      Title="BACKTEST"
+                      Height="600" WindowState="Maximized"
+                      Width="800">
+
+    <DockPanel>
+
+        <Expander x:Name="expSettings" DockPanel.Dock="Left" ExpandDirection="Right" IsExpanded="True" BorderThickness="1 0 1 0">
+            <Expander.Header>
+                <TextBlock Foreground="White" Text="SETTINGS">
+                    <TextBlock.LayoutTransform>
+                        <RotateTransform Angle="90"/>
+                    </TextBlock.LayoutTransform>
+
+                </TextBlock>
+            </Expander.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <GroupBox Margin="10" Style="{x:Null}" Header="Data" Grid.Row="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"></ColumnDefinition>
+                            <ColumnDefinition Width="140"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Exchange:</TextBlock>
+                        <ComboBox x:Name="cmbExchange"  Grid.Column="1" Grid.Row="0" SelectedIndex="0"  Margin="5">
+                            <ComboBoxItem Content="HitBTC"/>
+                        </ComboBox>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Symbol:</TextBlock>
+                        <ComboBox x:Name="cmbSymbol" Grid.Column="1" Grid.Row="1" SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="BTCUSD"/>
+                        </ComboBox>
+
+                        <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Canldes:</TextBlock>
+                        <ComboBox x:Name="cmbCandle" Grid.Column="1" Grid.Row="2" SelectedIndex="0" Margin="5">
+                            <ComboBoxItem Content="1m"/>
+                            <ComboBoxItem Content="3m"/>
+                            <ComboBoxItem Content="5m"/>
+                            <ComboBoxItem Content="15m"/>
+                            <ComboBoxItem Content="30m"/>
+                            <ComboBoxItem Content="1H"/>
+                            <ComboBoxItem Content="4H"/>
+                            <ComboBoxItem Content="1D"/>
+                            <ComboBoxItem Content="7D"/>
+                            <ComboBoxItem Content="1M"/>
+                        </ComboBox>
+
+                        <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0"># Candles:</TextBlock>
+                        <Controls:NumericUpDown x:Name="txbNCandle" Grid.Column="1" Value="0" Grid.Row="3" Margin="5"></Controls:NumericUpDown>
+
+                        <Button x:Name="btnLoadCandles"   Grid.Column="1" Grid.Row="4" Margin="8" Click="BtnLoadCandles_OnClick">Load Data</Button>
+                        <Button x:Name="btnLoadChart" IsEnabled="False"  Grid.Column="1" Grid.Row="5" Margin="8" Click="BtnLoadChart_OnClick">Show Chart</Button>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Margin="10" Style="{x:Null}" Header="Strategy" Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"></ColumnDefinition>
+                            <ColumnDefinition Width="140"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Amount USDT:</TextBlock>
+                        <Controls:NumericUpDown x:Name="txbStartAmount" Value="0" Grid.Row="0" Grid.Column="1"  Margin="5"></Controls:NumericUpDown>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Periods m:</TextBlock>
+                        <Controls:NumericUpDown x:Name="txbMinPerdiod" Value="0" Grid.Row="1" Grid.Column="1"  Margin="5"></Controls:NumericUpDown>
+
+                        <TextBlock  Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Periods M:</TextBlock>
+                        <Controls:NumericUpDown x:Name="txbMaxPerdiod" Value="0" Grid.Row="2" Grid.Column="1"  Margin="5"></Controls:NumericUpDown>
+
+                        <TextBlock  Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Min EMA:</TextBlock>
+                        <Controls:NumericUpDown x:Name="txbMinEMA" Value="0" Grid.Row="3" Grid.Column="1"  Margin="5"></Controls:NumericUpDown>
+
+                        <TextBlock  Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 5 0">Max EMA:</TextBlock>
+                        <Controls:NumericUpDown x:Name="txbMaxEMA" Value="0" Grid.Row="4" Grid.Column="1"  Margin="5"></Controls:NumericUpDown>
+
+
+                        <Button  x:Name="btnStartBackTest" Click="BtnStartBackTest_OnClick"  Grid.Column="1" Grid.Row="5" Margin="8">Start</Button>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Expander>
+
+        <Expander x:Name="expResult" DockPanel.Dock="Bottom" ExpandDirection="Up"  IsExpanded="False" BorderThickness="0 1 1 0">
+            <Expander.Header>
+                <TextBlock Foreground="White" Text="RESULT">
+                </TextBlock>
+            </Expander.Header>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140"></ColumnDefinition>
+                    <ColumnDefinition Width="140"></ColumnDefinition>
+                    <ColumnDefinition Width="140"></ColumnDefinition>
+                    <ColumnDefinition Width="140"></ColumnDefinition>
+                    <ColumnDefinition Width="140"></ColumnDefinition>
+                    <ColumnDefinition Width="140"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="10" FontWeight="Bold">Start Price BTC:</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="1"  x:Name="txbStartBTCPrice" Margin="10"></TextBlock>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="10" FontWeight="Bold">End Price BTC:</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="txbEndBTCPrice" Margin="10"></TextBlock>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Margin="10" FontWeight="Bold">Increment BTC:</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="1"  x:Name="txbIncrementBTC" Margin="10"></TextBlock>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="10" FontWeight="Bold">Increment BTC %:</TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="1" x:Name="txbIncrementBTCPerc" Margin="10"></TextBlock>
+
+                <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="10" FontWeight="Bold">Star Amount USDT:</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="3" x:Name="txbStartUSDTAmount" Margin="10"></TextBlock>
+
+                <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="10" FontWeight="Bold">End Amount USDT:</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="3" x:Name="txbEndUSDTAmount" Margin="10"></TextBlock>
+
+                <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="10" FontWeight="Bold">Increment USDT:</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="3" x:Name="txbIncrementUSDT" Margin="10"> </TextBlock>
+
+                <TextBlock Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" Margin="10" FontWeight="Bold">Increment USDT %:</TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="3" x:Name="txbIncrementUSDTPerc" Margin="10"></TextBlock>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" Margin="10" FontWeight="Bold">Proft USDT:</TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="1" x:Name="txbProfitUSDT" Margin="10"></TextBlock>
+
+                <TextBlock Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right" Margin="10" FontWeight="Bold">Proft USDT %:</TextBlock>
+                <TextBlock Grid.Row="5" Grid.Column="3" x:Name="txbProfitUSDTPerc" Margin="10"></TextBlock>
+
+                <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" Margin="10" FontWeight="Bold"># Trades:</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="5" x:Name="txbNTrades" Margin="10"></TextBlock>
+
+            </Grid>
+        </Expander>
+        <Grid DockPanel.Dock="Left">
+
+            <lvc:CartesianChart x:Name="chart" Grid.Column="1" Zoom="Xy" ScrollMode="XY" DisableAnimations="True" Hoverable="False">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis x:Name="chartAxisX"/>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis x:Name="chartAxisY" />
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </Grid>
+    </DockPanel>
+</Controls:MetroWindow>
